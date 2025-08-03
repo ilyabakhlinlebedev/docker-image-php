@@ -1,0 +1,22 @@
+name: readline
+description: Action description.
+runs:
+  steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: ncurses-6.5.0
+        path: debian/bookworm/readline/8.2.0/opt/ncurses/6.5.0
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v6
+      with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        context: debian/bookworm/readline/8.2.0
+        outputs: type=local,dest=debian/bookworm/readline/8.2.0
+        platforms: linux/amd64
+    - uses: actions/upload-artifact@v4
+      with:
+        name: readline-8.2.0
+        path: debian/bookworm/readline/8.2.0/opt/readline/8.2.0
+        retention-days: 8
+  using: composite
