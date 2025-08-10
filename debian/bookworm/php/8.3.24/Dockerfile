@@ -110,6 +110,12 @@ RUN make -j $(nproc) && make install
 FROM build AS install-php
 
 COPY --from=build-php /opt/PHP/8.3.24/ /opt/PHP/8.3.24/
+
+RUN find /opt/PHP/8.3.24/etc/ -name "*.default" -delete
+
+COPY /opt/PHP/8.3.24/etc/php-fpm.conf /opt/PHP/8.3.24/etc/php-fpm.conf
+COPY /opt/PHP/8.3.24/etc/php-fpm.d/www.conf /opt/PHP/8.3.24/etc/php-fpm.d/www.conf
+
 COPY --from=wget-composer /tmp/composer-installer.php /tmp/composer-installer.php
 
 RUN /opt/PHP/8.3.24/bin/php /tmp/composer-installer.php --filename=composer --install-dir=/opt/PHP/8.3.24/bin/
