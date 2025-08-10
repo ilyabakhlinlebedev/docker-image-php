@@ -17,9 +17,13 @@ FROM base AS wget
 
 RUN apt-get -qq -y install wget
 
+FROM wget AS wget-ca-bundle
+
+RUN wget -O /tmp/ca-bundle.pem -q "https://curl.se/ca/cacert.pem"
+
 FROM wget AS wget-composer
 
-RUN wget -O /tmp/composer-installer.php "https://getcomposer.org/installer"
+RUN wget -O /tmp/composer-installer.php -q "https://getcomposer.org/installer"
 
 FROM wget AS wget-php
 
@@ -100,6 +104,7 @@ RUN ./configure \
     --with-openssl \
     --with-openssl-dir \
     --with-pdo-sqlite \
+    --with-pear \
     --with-readline=/opt/readline/8.2.0 \
     --with-sqlite3 \
     --with-zip \
@@ -110,6 +115,11 @@ RUN make -j $(nproc) && make install
 FROM build AS install-php
 
 COPY --from=build-php /opt/PHP/8.3.24/ /opt/PHP/8.3.24/
+COPY --from=wget-ca-bundle /tmp/ca-bundle.pem /opt/PHP/8.3.24/ssl/ca-bundle.pem
+
+ARG SSL_CERT_FILE=/opt/PHP/8.3.24/ssl/ca-bundle.pem
+
+RUN /opt/PHP/8.3.24/bin/pecl channel-update pecl.php.net
 
 RUN find /opt/PHP/8.3.24/etc/ -name "*.default" -delete
 
@@ -122,11 +132,15 @@ RUN /opt/PHP/8.3.24/bin/php /tmp/composer-installer.php --filename=composer --in
 
 FROM install-php AS install-php-dev
 
-COPY --from=wget-php /tmp/php/8.3.24/php.ini-development /opt/PHP/8.3.24/etc/php.ini
+COPY /opt/PHP/8.3.24/etc/php.ini-production /opt/PHP/8.3.24/etc/php.ini
+
+RUN /opt/PHP/8.3.24/bin/pecl install xdebug-3.4.5
+
+COPY /opt/PHP/8.3.24/etc/ext/xdebug.ini /opt/PHP/8.3.24/etc/ext/xdebug.ini
 
 FROM install-php AS install-php-pro
 
-COPY --from=wget-php /tmp/php/8.3.24/php.ini-production /opt/PHP/8.3.24/etc/php.ini
+COPY /opt/PHP/8.3.24/etc/php.ini-development /opt/PHP/8.3.24/etc/php.ini
 
 FROM debian:bookworm AS php-dev
 

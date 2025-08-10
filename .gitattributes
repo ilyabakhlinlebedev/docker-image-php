@@ -8,5 +8,9 @@
 # HCL
 /**/*.hcl eol=lf text
 
+# PHP
+/**/*.conf eol=lf text
+/**/*.ini-* eol=lf text
+
 # YAML
 /**/*.yml eol=lf text
