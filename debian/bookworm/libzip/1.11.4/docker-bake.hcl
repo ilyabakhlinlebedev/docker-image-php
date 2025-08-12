@@ -1,4 +1,4 @@
-target "libzip-1_11_4" {
+target "default" {
     context = "debian/bookworm/libzip/1.11.4"
     dockerfile = "Dockerfile"
     output = [

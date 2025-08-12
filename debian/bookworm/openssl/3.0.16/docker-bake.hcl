@@ -1,4 +1,4 @@
-target "openssl-3_0_16" {
+target "default" {
     context = "debian/bookworm/openssl/3.0.16"
     dockerfile = "Dockerfile"
     output = [

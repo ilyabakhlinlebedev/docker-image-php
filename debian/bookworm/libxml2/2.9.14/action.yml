@@ -7,8 +7,6 @@ runs:
     - uses: docker/setup-buildx-action@v3
     - uses: docker/build-push-action@v6
       with:
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
         context: debian/bookworm/libxml2/2.9.14
         outputs: type=local,dest=debian/bookworm/libxml2/2.9.14
         platforms: linux/amd64

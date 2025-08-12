@@ -1,4 +1,4 @@
-target "oniguruma-6_9_10" {
+target "default" {
     context = "debian/bookworm/oniguruma/6.9.10"
     dockerfile = "Dockerfile"
     output = [

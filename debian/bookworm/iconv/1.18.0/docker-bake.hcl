@@ -1,4 +1,4 @@
-target "iconv-1_18_0" {
+target "default" {
     context = "debian/bookworm/iconv/1.18.0"
     dockerfile = "Dockerfile"
     output = [

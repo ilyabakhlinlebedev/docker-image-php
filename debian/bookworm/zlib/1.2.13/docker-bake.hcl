@@ -1,4 +1,4 @@
-target "zlib-1_2_13" {
+target "default" {
     context = "debian/bookworm/zlib/1.2.13"
     dockerfile = "Dockerfile"
     output = [

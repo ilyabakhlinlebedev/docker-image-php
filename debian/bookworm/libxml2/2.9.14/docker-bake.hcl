@@ -1,4 +1,4 @@
-target "libxml2-2_9_14" {
+target "default" {
     context = "debian/bookworm/libxml2/2.9.14"
     dockerfile = "Dockerfile"
     output = [

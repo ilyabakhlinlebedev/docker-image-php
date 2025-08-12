@@ -1,4 +1,4 @@
-target "readline-8_2_0" {
+target "default" {
     context = "debian/bookworm/readline/8.2.0"
     dockerfile = "Dockerfile"
     output = [

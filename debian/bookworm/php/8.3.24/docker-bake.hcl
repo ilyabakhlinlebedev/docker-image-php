@@ -8,4 +8,5 @@ target "default" {
         "ilyabakhlinlebedev/php:8.3.24",
         "ilyabakhlinlebedev/php:8.3",
     ]
+    target = "build-php"
 }

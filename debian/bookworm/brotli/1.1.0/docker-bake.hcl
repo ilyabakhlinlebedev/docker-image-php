@@ -1,4 +1,4 @@
-target "brotli-1_1_0" {
+target "default" {
     context = "debian/bookworm/brotli/1.1.0"
     dockerfile = "Dockerfile"
     output = [

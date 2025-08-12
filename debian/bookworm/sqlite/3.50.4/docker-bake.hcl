@@ -1,4 +1,4 @@
-target "sqlite-3_50_4" {
+target "default" {
     context = "debian/bookworm/sqlite/3.50.4"
     dockerfile = "Dockerfile"
     output = [

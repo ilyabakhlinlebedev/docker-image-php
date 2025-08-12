@@ -3,8 +3,6 @@ runs:
     - uses: docker/setup-buildx-action@v3
     - uses: docker/build-push-action@v6
       with:
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
         context: debian/bookworm/zstd/1.5.7
         outputs: type=local,dest=debian/bookworm/zstd/1.5.7
         platforms: linux/amd64

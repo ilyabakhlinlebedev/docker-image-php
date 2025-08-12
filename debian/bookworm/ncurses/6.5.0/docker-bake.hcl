@@ -1,4 +1,4 @@
-target "ncurses-6_5_0" {
+target "default" {
     context = "debian/bookworm/ncurses/6.5.0"
     dockerfile = "Dockerfile"
     output = [

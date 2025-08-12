@@ -1,4 +1,4 @@
-target "icu-77_1_0" {
+target "default" {
     context = "debian/bookworm/icu/77.1.0"
     dockerfile = "Dockerfile"
     output = [

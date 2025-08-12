@@ -83,6 +83,7 @@ RUN ./configure \
     --enable-ipv6 \
     --enable-libgcc \
     --enable-mbstring \
+    --enable-mysqlnd \
     --enable-option-checking=fatal \
     --enable-pdo \
     --enable-phar \
@@ -101,14 +102,17 @@ RUN ./configure \
     --with-gnu-ld \
     --with-iconv=/opt/iconv/1.18.0 \
     --with-libxml \
+    --with-mysqli \
     --with-openssl \
     --with-openssl-dir \
+    --with-pdo-mysql \
     --with-pdo-sqlite \
     --with-pear \
     --with-readline=/opt/readline/8.2.0 \
     --with-sqlite3 \
     --with-zip \
-    --with-zlib
+    --with-zlib \
+    --with-zlib-dir=/opt/zlib/1.2.13
 
 RUN make -j $(nproc) && make install
 
