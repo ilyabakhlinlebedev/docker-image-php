@@ -139,6 +139,7 @@ RUN /opt/PHP/8.3.24/bin/php /tmp/composer-installer.php --filename=composer --in
 FROM install-php AS install-php-dev
 
 COPY /opt/PHP/8.3.24/etc/php.ini-development /opt/PHP/8.3.24/etc/php.ini
+COPY /opt/PHP/8.3.24/etc/ext/opcache.ini /opt/PHP/8.3.24/etc/ext/opcache.ini
 
 RUN /opt/PHP/8.3.24/bin/pecl install xdebug-3.4.5
 
@@ -147,6 +148,7 @@ COPY /opt/PHP/8.3.24/etc/ext/xdebug.ini /opt/PHP/8.3.24/etc/ext/xdebug.ini
 FROM install-php AS install-php-pro
 
 COPY /opt/PHP/8.3.24/etc/php.ini-production /opt/PHP/8.3.24/etc/php.ini
+COPY /opt/PHP/8.3.24/etc/ext/opcache.ini /opt/PHP/8.3.24/etc/ext/opcache.ini
 
 FROM debian:bookworm AS php-dev
 

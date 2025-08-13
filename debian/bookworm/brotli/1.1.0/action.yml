@@ -1,10 +1,11 @@
 runs:
   steps:
     - uses: docker/setup-buildx-action@v3
-    - uses: actions/cache/restore@v4
+    - uses: actions/cache@v4
       with:
-        key: debian-bookworm-brotli-1.1.0
+        key: debian-bookworm-brotli-1.1.0-${{ github.run_id }}
         path: debian/bookworm/brotli/1.1.0/cache
+        restore-keys: debian-bookworm-brotli-1.1.0
     - uses: docker/build-push-action@v6
       with:
         cache-from: type=local,src=debian/bookworm/brotli/1.1.0/cache
@@ -16,9 +17,5 @@ runs:
       with:
         name: brotli-1.1.0
         path: debian/bookworm/brotli/1.1.0/opt/brotli/1.1.0
-        retention-days: 8
-    - uses: actions/cache/save@v4
-      with:
-        key: debian-bookworm-brotli-1.1.0
-        path: debian/bookworm/brotli/1.1.0/cache
+        retention-days: 1
   using: composite
