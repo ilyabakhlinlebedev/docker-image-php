@@ -84,6 +84,8 @@ RUN ./configure \
     --enable-libgcc \
     --enable-mbstring \
     --enable-mysqlnd \
+    --enable-opcache \
+    --enable-opcache-jit \
     --enable-option-checking=fatal \
     --enable-pdo \
     --enable-phar \
